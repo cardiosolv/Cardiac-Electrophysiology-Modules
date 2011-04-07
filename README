@@ -1,0 +1,32 @@
+Cardiac Electrophysiology Modules
+Brock M. Tice
+brock@cardiosolv.com
+
+This program is designed to post-process the output of CardioSolv
+LLC's CARP simulator, either in serial or in parallel. It is ideally
+suited to analyzing large datasets in parallel using MPI.
+
+The "modules" name comes from the fact that it is a library of modules
+that may build on each other, and be built upon to create analysis
+scripts. The main analysis techniques that people seem to want to use
+are already included in the parallel_mapper and trace programs, but it
+should be quick and easy to build other utilities as needed.
+
+In general, foo_mod.cxx files implement something meant to deal with
+single element data, while foo_map_mod.cxx files build on the
+foo_mod.cxx files to analyze data from many elements in parallel. For
+a good example, start with the act_mod.cxx and corresponding
+amap_mod.cxx files. These demonstrate how to expand from a single
+element to many elements.
+
+= Build System =
+
+Currently you should copy Makefile.example to Makefile, and then edit
+Makefile appropriately for your machine. A CMake-based build system is
+in the works.
+
+Then type "make parallel_mapper", or "make serial_mapper", or "make
+trace".  Please note that the library can be compiled either as serial
+or as parallel. 'serial_mapper' is just a serial (non-MPI) version of
+parallel_mapper, and trace is serial as well, so "make clean" between
+parallel_mapper and serial_mapper/trace.
